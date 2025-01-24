@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #ecf0f1;
+            --table-header: #34495e;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+
+        .invoice-container {
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            border-top: 5px solid var(--secondary-color);
+            padding: 10px;
+            width: 8.5in; /* Standard A4 page width */
+        }
+
+        .table th {
+            background-color: var(--table-header);
+            color: white;
+            font-weight: 500;
+            padding: 4px;
+            font-size: 0.8rem;
+        }
+
+        .table td {
+            border-color: #dee2e6;
+            padding: 4px;
+            font-size: 0.8rem;
+        }
+
+        .table-bordered {
+            border-color: #dee2e6;
+        }
+
+        .fw-bold {
+            color: var(--primary-color);
+        }
+
+        .amount-words {
+            font-size: 0.9rem;
+            font-weight: 500;
+            background-color: #f8f9fa;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        @media print {
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background: white;
+            }
+
+            .invoice-container {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 0.5in; /* Add some padding for printing */
+            }
+
+            /* Prevent breaking inside rows and tables */
+            .row, .table, .table-responsive, .amount-words, .text-center {
+                page-break-inside: avoid;
+            }
+
+            .table th, .table td {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Mobile responsive table styles */
+        @media screen and (max-width: 768px) {
+            .mobile-table thead {
+                display: none;
+            }
+
+            .mobile-table tbody tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid var(--secondary-color);
+                border-radius: 8px;
+                padding: 0.5rem;
+            }
+
+            .mobile-table tbody td {
+                display: block;
+                text-align: right;
+                padding: 0.5rem;
+                border: none;
+                position: relative;
+                padding-left: 50%;
+            }
+
+            .mobile-table td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 0.5rem;
+                font-weight: bold;
+                text-align: left;
+            }
+
+            .mobile-table td:not(:last-child) {
+                border-bottom: 1px solid #dee2e6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container invoice-container my-2 p-3">
+        <!-- Header Section -->
+        <div class="row mb-2">
+            <!-- Patient Information -->
+            <div class="col-12 col-md-6 mb-2 mb-md-0">
+                <div class="card border-0 bg-light p-3">
+                    <div class="d-flex flex-column gap-2">
+                        <p class="mb-0"><span class="fw-semibold">PATIENT NAME:</span> ANIL SHINDE</p>
+                        <p class="mb-0"><span class="fw-semibold">PATIENT ADDRESS:</span> PUNE-411037</p>
+                        <p class="mb-0"><span class="fw-semibold">DOCTOR NAME:</span></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Invoice Details -->
+            <div class="col-12 col-md-6">
+                <div class="card border-0 bg-light p-3">
+                    <div class="d-flex flex-column gap-2 text-md-end">
+                        <p class="mb-0"><span class="fw-semibold">INVOICE NUMBER:</span> 24425546120</p>
+                        <p class="mb-0"><span class="fw-semibold">DATE:</span> 2024-12-19</p>
+                        <p class="mb-0"><span class="fw-semibold">TIME:</span> 22:14:18.000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Products Table -->
+        <div class="table-responsive mb-2">
+            <table class="table table-bordered mobile-table">
+                <thead>
+                    <tr>
+                        <th>DESCRIPTION OF GOODS HSN/SAC CODE</th>
+                        <th>QTY</th>
+                        <th>LOOSE QTY</th>
+                        <th>BATCH NO. EXPIRY DATE</th>
+                        <th>MRP</th>
+                        <th>DISC %</th>
+                        <th>GST %</th>
+                        <th>AMT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="DESCRIPTION">PAMP DIAP PREMIUM CARE PANTS L 13PC 384598</td>
+                        <td data-label="QTY">1</td>
+                        <td data-label="LOOSE QTY">0</td>
+                        <td data-label="BATCH NO. EXPIRY">41749383000T2 2027-06-01</td>
+                        <td data-label="MRP">299.00</td>
+                        <td data-label="DISC %">0%</td>
+                        <td data-label="GST %">12%</td>
+                        <td data-label="AMT">298.98</td>
+                    </tr>
+                    <tr>
+                        <td data-label="DESCRIPTION">CADB CHOC SILK FRUIT/NUT 137GM 201892</td>
+                        <td data-label="QTY">1</td>
+                        <td data-label="LOOSE QTY">0</td>
+                        <td data-label="BATCH NO. EXPIRY">K40927_4 2025-09-26</td>
+                        <td data-label="MRP">195.00</td>
+                        <td data-label="DISC %">4%</td>
+                        <td data-label="GST %">18%</td>
+                        <td data-label="AMT">187.18</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Divider Line -->
+        <hr class="border border-dark border-1 opacity-75 my-2">
+        <!-- Tax and Amount Summary -->
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <table class="table table-bordered">
+                    <tr><td>CGST</td><td class="text-end">₹30.28</td></tr>
+                    <tr><td>SGST</td><td class="text-end">₹30.28</td></tr>
+                    <tr><td>IGST</td><td class="text-end">₹0.00</td></tr>
+                    <tr><td>CESS AMOUNT</td><td class="text-end">₹0.00</td></tr>
+                    <tr><td>TOTAL TAX AMOUNT</td><td class="text-end">₹60.56</td></tr>
+                    <tr><td>TAXABLE AMOUNT</td><td class="text-end">₹425.60</td></tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-bordered">
+                    <tr><td>GROSS AMOUNT</td><td class="text-end">₹494.00</td></tr>
+                    <tr><td>DISCOUNT</td><td class="text-end">₹7.84</td></tr>
+                    <tr><td>DELIVERY CHARGES</td><td class="text-end">₹00.00</td></tr>
+                    <tr><td class="fw-bold">NET PAYABLE</td><td class="text-end fw-bold">₹486.16</td></tr>
+                    <tr><td colspan="2" class="text-center amount-words">FOUR HUNDRED EIGHTY SIX RUPEES AND SIXTEEN PAISE ONLY</td></tr>
+                </table>
+            </div>
+        </div>
+        <!-- Thank You Message -->
+        <div class="text-center fw-bold mb-2">THANK YOU FOR SHOPPING WITH US!</div>
+        <!-- Footer -->
+        <div class="border-top pt-1">
+            <div class="row">
+                <div class="col-12 col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0">Regd. Off: 7th floor, Wing A, Empire Plaza, IT Park, LBS Marg, Vikhroli West, Mumbai - 400083</p>
+                    <p class="mb-0"><a href="webstore.wellnessforever.in" class="text-decoration-none">webstore.wellnessforever.in</a></p>
+                </div>
+                <div class="col-12 col-md-6 text-center text-md-end">
+                    <p class="fw-bold mb-0">WELLNESS FOREVER MEDICARE LIMITED</p>
+                    <p class="mt-2 mb-0">Authorized Signature</p>
+                    <p class="text-muted small">This is computer generated invoice does not require signature</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
